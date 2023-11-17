@@ -76,7 +76,7 @@
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary btn-secondary"
                                     style="width: 50%; font-size: 1.2em;">
-                                    {{ __('Register') }}
+                                    登録
                                 </button>
                             </div>
                         </div>
