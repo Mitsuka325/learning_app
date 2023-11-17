@@ -22,7 +22,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-
+{{'test'}}
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
