@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('grade_id');
+            $table->unsignedBigInteger('grade_id')->default(0);
             $table->string('lesson_name');
             $table->string('video_url'); 
             $table->text('description');

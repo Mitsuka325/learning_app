@@ -6,31 +6,21 @@
             <div class="col-md-8">
                 <div class="card-header">
                     <div class="mb-3">
-                        <a href="{{ route('admin_index') }}" style="font-size: 18px; color:black;">←戻る</a>
 
-                        <h2 class="mb-4 mt-3">授業設定</h2>
+                        <h2 class="mb-4 mt-3">授業詳細</h2>
                     </div>
                     <div class="card-body">
-                        @if ($errors->any())
-                            <div class="alert alert-danger mt-3">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-
-                        <form action="{{ route('course.store') }}" method="POST" enctype="multipart/form-data">
+                 <form action="{{ route('course.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                                 <label for="img_path" class="col-sm-2 col-form-label">サムネイル</label>
-                                <input type="file" class="form-control" id="img_path" name="img_path">
+                                <img src="{{ asset('storage/' . $course->image) }}" alt="course Image" class="img-fluid">
+                        
                             </div>
 
                             <div class=" mb-3">
                                 <label for="grade" class="form-label">学年</label>
                                 <select class="form-select" aria-label="Default select example" id="grade"
-                                    name="grade_id"><option value="">選択してください</option>
+                                    name="grade_id" disabled>
                                     @foreach (App\Models\Grade::all() as $grade)
                                         <option value="{{ $grade->id }}">{{ $grade->grade_name }}</option>
                                     @endforeach
@@ -39,19 +29,21 @@
 
                             <div class="mb-3">
                                 <label for="lesson_name" class="form-label">授業名</label>
-                                <input type="text" class="form-control" id="lesson_name" name="lesson_name">
+                                <input type="text" class="form-control" id="lesson_name" name="lesson_name" disabled
+                                value="{{$course->lesson_name}}">
                             </div>
 
                             <div class="mb-3">
                                 <label for="video_url" class="form-label">動画URL</label>
-
-                                <input type="text" class="form-control" id="video_url" name="video_url">
+                                <input type="text" class="form-control" id="video_url" name="video_url" disabled
+                                value="{{$course->video_url}}"
+                                >
                             </div>
 
                             <div class="mb-3">
                                 <label for="description" class="form-label">授業概要</label>
-
-                                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                                <textarea class="form-control" id="description" name="description"disabled rows="3">
+                                {{trim($course->description)}}</textarea>
                             </div>
 
                             <div class="mb-3 form-check">
@@ -60,7 +52,7 @@
                             </div>
 
                             <div class="mb-3 text-center">
-                            <button type="submit" class="btn btn-secondary btn-lg w-50">登録</button>
+                            <a href="{{ route('admin_index') }}" style="font-size: 18px; color:black;">←戻る</a>
                         </form>
                     </div>
                 </div>

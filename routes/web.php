@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AdminClassController;
+use App\Http\Controllers\Admin\CourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,5 +23,27 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'admin_index'])->name('admin_index');
+Route::get('/admin/courses', [App\Http\Controllers\Admin\CourseController::class, 'index'])->name('admin.course.index');
 Route::get('admin/course/create',[App\Http\Controllers\Admin\CourseController::class, 'create']);
-Route::post('admin/course/store',[App\Http\Controllers\Admin\CourseController::class, 'store'])->name('couse.store');
+Route::post('admin/course/store',[App\Http\Controllers\Admin\CourseController::class, 'store'])->name('course.store');
+Route::get('admin/course/{id}', [App\Http\Controllers\Admin\CourseController::class, 'show'])->name('admin.course.show');
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'admin_index'])->name('admin_index');
+
+// // コースに関するリソースコントローラのルート
+Route::resource('admin/course', CourseController::class); // コースの CRUD 操作用ルート
+
+// 上記のコードを実行すると、以下のルートが自動的に生成されます：
+// admin/course (GET) - index（一覧表示）の表示
+// admin/course/create (GET) - 新規作成フォームの表示
+// admin/course/store (POST) - コースの新規作成
+// admin/course/{id} (GET) - 特定のコースの表示
+// admin/course/{id}/edit (GET) - 編集フォームの表示
+// admin/course/{id} (PUT/PATCH) - コースの更新
+// admin/course/{id} (DELETE) - コースの削除
