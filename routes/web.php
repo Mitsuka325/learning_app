@@ -23,4 +23,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'admin_index'])->name('admin_index');
-Route::get('/admin/class/admin_class_create', [AdminClassController::class, 'create'])->name('admin_class_create');
+Route::get('admin/course/create',[App\Http\Controllers\Admin\CourseController::class, 'create']);

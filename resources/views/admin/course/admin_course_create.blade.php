@@ -20,7 +20,7 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('class.store') }}" method="POST" enctype="multipart/form-data">
+                        {{-- <form action="{{ route('class.store') }}" method="POST" enctype="multipart/form-data"> --}}
                             @csrf
                             <div class="mb-3">
                                 <label for="img_path" class="form-label">サムネイル</label>
