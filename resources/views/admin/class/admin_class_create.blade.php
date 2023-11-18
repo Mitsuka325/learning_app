@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ route('dashboard') }}" class="btn btn-secondary">戻る</a>
+                        <a href="{{ route('admin_index') }}" class="btn btn-secondary">戻る</a>
                         <h2 class="mb-0">授業設定</h2>
                     </div>
                     <div class="card-body">
