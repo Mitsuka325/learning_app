@@ -24,3 +24,4 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'admin_index'])->name('admin_index');
 Route::get('admin/course/create',[App\Http\Controllers\Admin\CourseController::class, 'create']);
+Route::post('admin/course/store',[App\Http\Controllers\Admin\CourseController::class, 'store'])->name('couse.store');
