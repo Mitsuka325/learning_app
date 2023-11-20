@@ -16,4 +16,9 @@ class Course extends Model
         'description',
         'image',
     ];
+
+    public function grade()
+    {
+        return $this->belongsTo(Grade::class, 'grade_id');
+    }
 }
