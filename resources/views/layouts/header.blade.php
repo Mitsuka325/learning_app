@@ -10,7 +10,7 @@
                         <a href="{{route('admin.notice.index')}}" class="btn btn-secondary me-3">お知らせ管理</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="btn btn-secondary me-3">バナー管理</a>
+                        <a href="{{route('admin.banner.index')}}" class="btn btn-secondary me-3">バナー管理</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">

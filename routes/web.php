@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BannerController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
@@ -36,7 +37,8 @@ Route::delete('admin/course/{id}', [App\Http\Controllers\Admin\CourseController:
 Route::resource('admin/notice', NoticeController::class); 
 Route::get('/admin/notice', [NoticeController::class, 'index'])->name('admin.notice.index');
 
-
+Route::resource('admin/banner', BannerController::class); 
+Route::get('/admin/banner', [BannerController::class, 'index'])->name('admin.banner.index');
 
 
 
