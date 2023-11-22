@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\NoticeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,15 @@ Route::get('admin/course/{id}', [App\Http\Controllers\Admin\CourseController::cl
 Route::get('admin/course/{id}/edit', [App\Http\Controllers\Admin\CourseController::class, 'edit'])->name('admin.course.edit');
 Route::put('admin/course/{id}', [App\Http\Controllers\Admin\CourseController::class, 'update'])->name('admin.course.update');
 Route::delete('admin/course/{id}', [App\Http\Controllers\Admin\CourseController::class, 'destroy'])->name('admin.course.destroy');
+
+Route::resource('admin/notice', NoticeController::class); 
+
+
+
+
+
+
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -39,7 +50,7 @@ Route::delete('admin/course/{id}', [App\Http\Controllers\Admin\CourseController:
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'admin_index'])->name('admin_index');
 
 // // コースに関するリソースコントローラのルート
-Route::resource('admin/course', CourseController::class); // コースの CRUD 操作用ルート
+// Route::resource('admin/course', CourseController::class); // コースの CRUD 操作用ルート
 
 // 上記のコードを実行すると、以下のルートが自動的に生成されます：
 // admin/course (GET) - index（一覧表示）の表示
