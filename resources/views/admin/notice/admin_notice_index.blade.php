@@ -35,7 +35,11 @@
                             <a href="{{ route('notice.edit', $notice) }}"class="btn btn-primary btn-success">変更する</a>
                         </td>
                         <td>
-                            <button class="btn btn-danger delete-notice" data-notice-id="{{ $notice->id }}">削除</button>
+                            <form action="{{ route('notice.destroy', $notice) }}" method="post">
+                                @csrf
+                                @method('delete')                                        
+                                <button type="submit"class="btn btn-danger" >削除</button>
+                            </form>
                     </tr>
                 @endforeach
             </tbody>

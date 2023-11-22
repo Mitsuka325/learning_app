@@ -15,8 +15,8 @@ class NoticeController extends Controller
      */
     public function index()
     {
-        $notices = Notice::all();
-        return view('admin.notice.admin_notice_index',compact('notices'));
+        $notices = Notice::latest()->get();
+        return view('admin.notice.admin_notice_index', compact('notices'));
     }
 
     /**
@@ -37,25 +37,14 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
-        $notice=new Notice();
-        $notice->post_time=$request->input('post_time');
-        $notice->title=$request->input('title');
-        $notice->description=$request->input('description');
+        $notice = new Notice();
+        $notice->post_time = $request->input('post_time');
+        $notice->title = $request->input('title');
+        $notice->description = $request->input('description');
         $notice->save();
-        return redirect()->route('admin.notice.index')->with('flash_message','お知らせを追加しました');  
-
+        return redirect()->route('admin.notice.index')->with('flash_message', 'お知らせを追加しました');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Notice  $notice
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Notice $notice)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -65,7 +54,7 @@ class NoticeController extends Controller
      */
     public function edit(Notice $notice)
     {
-        //
+        return view('admin.notice.admin_notice_edit', compact('notice'));
     }
 
     /**
@@ -77,7 +66,11 @@ class NoticeController extends Controller
      */
     public function update(Request $request, Notice $notice)
     {
-        //
+        $notice->post_time=$request->input('post_time');
+        $notice->title = $request->input('title');
+        $notice->description = $request->input('description');
+        $notice->save();
+        return redirect()->route('admin.notice.index')->with('flash_message', 'お知らせを変更しました');
     }
 
     /**
@@ -88,6 +81,8 @@ class NoticeController extends Controller
      */
     public function destroy(Notice $notice)
     {
-        //
+            $notice->delete();
+    
+            return redirect()->route('admin.notice.index')->with('flash_message', 'お知らせを削除しました。');
+        }
     }
-}

@@ -4,7 +4,7 @@
             <div class="container">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a href="#" class="btn btn-secondary me-3">授業管理</a>
+                        <a href="{{route('admin.course.index')}}" class="btn btn-secondary me-3">授業管理</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{route('admin.notice.index')}}" class="btn btn-secondary me-3">お知らせ管理</a>
