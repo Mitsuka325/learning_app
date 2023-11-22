@@ -30,6 +30,7 @@ class CourseController extends Controller
         return view('admin.course.admin_course_create');
     }
     
+    // 作成機能
       public function store(CourseStoreRequest $request)
   {
       DB::beginTransaction(); // トランザクションを開始
@@ -54,25 +55,25 @@ class CourseController extends Controller
       }
   }
 
-  
+//   詳細ページ
     // public function show(Course $course)
     // {
         public function show($id)
 {
-    $course = Course::find($id); // コース情報をIDで取得
+    $course = Course::find($id); 
 
     if (!$course) {
     }
         return view('admin.course.admin_course_show', compact('course'));
     }
 
-
+// 更新ページ
     public function edit(Course $course)
     {
         return view('admin.course.admin_course_edit', compact('course'));
     }
 
-
+// 更新処理
     public function update(Request $request, Course $course)
     {
         DB::beginTransaction();
@@ -93,12 +94,16 @@ class CourseController extends Controller
         }
     }
 
-    public function destroy(Course $course)
+    // 削除機能
+    public function destroy(Course $course,Request $request)
     {
         DB::beginTransaction();
         try {
             $course->delete();
             DB::commit();
+            if ($request->ajax()) {
+                return Course::search($request)->get();
+            }else
             return redirect()->route('admin.course.index')->with('flash_message', '授業が削除されました');
         } catch (\Throwable $th) {
             DB::rollBack();

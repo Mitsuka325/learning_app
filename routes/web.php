@@ -24,10 +24,12 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'admin_index'])->name('admin_index');
 Route::get('/admin/courses', [App\Http\Controllers\Admin\CourseController::class, 'index'])->name('admin.course.index');
-Route::get('admin/course/create',[App\Http\Controllers\Admin\CourseController::class, 'create']);
+Route::get('admin/course/create',[App\Http\Controllers\Admin\CourseController::class, 'create'])->name('admin.course.create');
 Route::post('admin/course/store',[App\Http\Controllers\Admin\CourseController::class, 'store'])->name('course.store');
 Route::get('admin/course/{id}', [App\Http\Controllers\Admin\CourseController::class, 'show'])->name('admin.course.show');
-
+Route::get('admin/course/{id}/edit', [App\Http\Controllers\Admin\CourseController::class, 'edit'])->name('admin.course.edit');
+Route::put('admin/course/{id}', [App\Http\Controllers\Admin\CourseController::class, 'update'])->name('admin.course.update');
+Route::delete('admin/course/{id}', [App\Http\Controllers\Admin\CourseController::class, 'destroy'])->name('admin.course.destroy');
 // Route::get('/', function () {
 //     return view('welcome');
 // });
