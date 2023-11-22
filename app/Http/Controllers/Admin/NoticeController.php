@@ -15,7 +15,8 @@ class NoticeController extends Controller
      */
     public function index()
     {
-        return view('admin.notice.admin_notice_index');
+        $notices = Notice::all();
+        return view('admin.notice.admin_notice_index',compact('notices'));
     }
 
     /**
@@ -36,7 +37,13 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $notice=new Notice();
+        $notice->post_time=$request->input('post_time');
+        $notice->title=$request->input('title');
+        $notice->description=$request->input('description');
+        $notice->save();
+        return redirect()->route('admin.notice.index')->with('flash_message','お知らせを追加しました');  
+
     }
 
     /**

@@ -34,7 +34,7 @@ Route::put('admin/course/{id}', [App\Http\Controllers\Admin\CourseController::cl
 Route::delete('admin/course/{id}', [App\Http\Controllers\Admin\CourseController::class, 'destroy'])->name('admin.course.destroy');
 
 Route::resource('admin/notice', NoticeController::class); 
-
+Route::get('/admin/notice', [NoticeController::class, 'index'])->name('admin.notice.index');
 
 
 

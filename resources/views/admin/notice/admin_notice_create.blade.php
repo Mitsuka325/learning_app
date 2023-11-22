@@ -28,7 +28,7 @@
                         <div class="mb-3 row">
                             <label for="lesson_name" class="col-sm-2 col-form-label">投稿日時</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="lesson_name" name="lesson_name">
+                                <input type="datetime-local" class="form-control" id="post_time" name="post_time">
                             </div>
                         </div>
 
