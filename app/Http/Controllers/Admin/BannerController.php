@@ -47,21 +47,20 @@ class BannerController extends Controller
             $banner->fill($validatedData);
     
             if ($request->hasFile('image')) {
-                $imgPath = $request->file('image')->store('banners','public');
+                $imgPath = $request->file('image')->store('images');
                 $banner->image = $imgPath;
             }
             $banner->save(); // データベースへの保存
     
             DB::commit(); // トランザクションをコミット
-            return redirect()->route('admin.banner.index')->with('flash_message', 'バーナーの登録が完了しました');
+            return redirect()->route('admin.banner.index')->with('flash_message', 'の登録が完了しました');
             
         } catch (\Throwable $th) {
             DB::rollBack(); // エラーがあった場合はロールバック
-            return back()->withErrors(['error' => 'バーナーの作成に失敗しました']);
+            return back()->withErrors(['error' => '授業の作成に失敗しました']);
         }
     }
-
-    /**
+/**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Banner  $banner
@@ -69,7 +68,7 @@ class BannerController extends Controller
      */
     public function edit(Banner $banner)
     {
-        // 
+        return view('admin.banner.admin_banner_edit', compact('banner'));
     }
 
     /**
@@ -81,7 +80,23 @@ class BannerController extends Controller
      */
     public function update(Request $request, Banner $banner)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $validatedData = $request->validated();
+            $banner->fill($validatedData);
+            
+            if ($request->hasFile('image')) {
+                $imgPath = $request->file('image')->store('images');
+                $banner->image = $imgPath;
+            }
+
+            $banner->save();
+            DB::commit();
+            return redirect()->route('admin.banner.index')->with('flash_message', 'の更新が完了しました');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->withErrors(['error' => '更新に失敗しました']);
+        }
     }
 
     /**
@@ -91,7 +106,18 @@ class BannerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Banner $banner)
-{
-    
-}
+    {
+        DB::beginTransaction();
+        try {
+            // 画像を削除するコード
+            // Storage::delete($banner->image);
+
+            $banner->delete();
+            DB::commit();
+            return redirect()->route('admin.banner.index')->with('flash_message', 'を削除しました');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->withErrors(['error' => '削除に失敗しました']);
+        }
+    }
 }

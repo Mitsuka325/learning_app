@@ -27,38 +27,18 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'admin_index'])->name('admin_index');
 Route::get('/admin/courses', [App\Http\Controllers\Admin\CourseController::class, 'index'])->name('admin.course.index');
-Route::get('admin/course/create',[App\Http\Controllers\Admin\CourseController::class, 'create'])->name('admin.course.create');
-Route::post('admin/course/store',[App\Http\Controllers\Admin\CourseController::class, 'store'])->name('course.store');
+Route::get('admin/course/create', [App\Http\Controllers\Admin\CourseController::class, 'create'])->name('admin.course.create');
+Route::post('admin/course/store', [App\Http\Controllers\Admin\CourseController::class, 'store'])->name('course.store');
 Route::get('admin/course/{id}', [App\Http\Controllers\Admin\CourseController::class, 'show'])->name('admin.course.show');
 Route::get('admin/course/{id}/edit', [App\Http\Controllers\Admin\CourseController::class, 'edit'])->name('admin.course.edit');
 Route::put('admin/course/{id}', [App\Http\Controllers\Admin\CourseController::class, 'update'])->name('admin.course.update');
 Route::delete('admin/course/{id}', [App\Http\Controllers\Admin\CourseController::class, 'destroy'])->name('admin.course.destroy');
 
-Route::resource('admin/notice', NoticeController::class); 
+Route::resource('admin/notice', NoticeController::class);
 Route::get('/admin/notice', [NoticeController::class, 'index'])->name('admin.notice.index');
 
-Route::resource('admin/banner', BannerController::class); 
+
 Route::get('/admin/banner', [BannerController::class, 'index'])->name('admin.banner.index');
-
-
-
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'admin_index'])->name('admin_index');
-
-// // コースに関するリソースコントローラのルート
-// Route::resource('admin/course', CourseController::class); // コースの CRUD 操作用ルート
-
-// 上記のコードを実行すると、以下のルートが自動的に生成されます：
-// admin/course (GET) - index（一覧表示）の表示
-// admin/course/create (GET) - 新規作成フォームの表示
-// admin/course/store (POST) - コースの新規作成
-// admin/course/{id} (GET) - 特定のコースの表示
-// admin/course/{id}/edit (GET) - 編集フォームの表示
-// admin/course/{id} (PUT/PATCH) - コースの更新
-// admin/course/{id} (DELETE) - コースの削除
+Route::get('/admin/banner/create', [BannerController::class, 'create'])->name('admin.banner.create');
+Route::post('/admin/banner/store', [BannerController::class, 'store'])->name('admin.banner.store');
+Route::delete('admin/banner/{banner}', [BannerController::class, 'destroy'])->name('admin.banner.destroy');
