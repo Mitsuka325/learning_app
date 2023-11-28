@@ -2,7 +2,7 @@
 
 @section('content')
     @if (session('flash_message'))
-        <p>{{ session('flash_message') }}</p>
+            <p class="ms-4">{{session('flash_message')}}</p>
     @endif
 
     <div class="card-header">
@@ -17,7 +17,7 @@
                         @foreach ($banners as $banner)
                             <tr>
                                 <td>
-                                    <img src="{{ asset($banner->image) }}" alt="バナー画像">
+                                    <img src="{{ asset('storage/'.$banner->image) }}" alt="バナー画像" style="width:100px">
                                 </td>
                                 <td>
                                     <form action="{{ route('admin.banner.destroy', $banner) }}" method="post">

@@ -53,7 +53,7 @@ class BannerController extends Controller
             $banner->save(); // データベースへの保存
     
             DB::commit(); // トランザクションをコミット
-            return redirect()->route('admin.banner.index')->with('flash_message', 'の登録が完了しました');
+            return redirect()->route('admin.banner.index')->with('flash_message', 'バナーの登録が完了しました');
             
         } catch (\Throwable $th) {
             DB::rollBack(); // エラーがあった場合はロールバック
@@ -92,7 +92,7 @@ class BannerController extends Controller
 
             $banner->save();
             DB::commit();
-            return redirect()->route('admin.banner.index')->with('flash_message', 'の更新が完了しました');
+            return redirect()->route('admin.banner.index')->with('flash_message', 'バナーの更新が完了しました');
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->withErrors(['error' => '更新に失敗しました']);
@@ -114,7 +114,7 @@ class BannerController extends Controller
 
             $banner->delete();
             DB::commit();
-            return redirect()->route('admin.banner.index')->with('flash_message', 'を削除しました');
+            return redirect()->route('admin.banner.index')->with('flash_message', 'バナーを削除しました');
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->withErrors(['error' => '削除に失敗しました']);
