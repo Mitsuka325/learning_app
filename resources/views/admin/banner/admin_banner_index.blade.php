@@ -23,7 +23,10 @@
                                     <form action="{{ route('admin.banner.destroy', $banner) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <button type="submit" class="btn btn-danger">削除</button>
+                                        <button type="submit" class="btn btn-danger">
+                                        <i class="bi bi-dash-circle"></i> 
+                                
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
@@ -33,7 +36,9 @@
                                 <form action="{{ route('admin.banner.store') }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <input type="file" name="image" accept="image/*">
-                                    <button type="submit" class="btn btn-primary mt-3">画像を追加</button>
+                                    <button type="submit" class="btn btn-success mt-3">
+                                        <i class="bi bi-plus-circle"></i>
+                                    </button>
                                 </form>
                             </td>
                         </tr>
