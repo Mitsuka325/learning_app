@@ -2,7 +2,7 @@
 
 @section('content')
     @if (session('flash_message'))
-            <p class="ms-4">{{session('flash_message')}}</p>
+        <p class="ms-4">{{ session('flash_message') }}</p>
     @endif
 
     <div class="card-header">
@@ -17,33 +17,55 @@
                         @foreach ($banners as $banner)
                             <tr>
                                 <td>
-                                    <img src="{{ asset('storage/'.$banner->image) }}" alt="バナー画像" style="width:100px">
+                                    <img src="{{ asset('storage/' . $banner->image) }}" alt="バナー画像" style="width:100px">
                                 </td>
                                 <td>
-                                    <form action="{{ route('admin.banner.destroy', $banner) }}" method="post">
+                                    <input type="file" name="image" accept="image/*"
+                                        onclick="document.getElementById('updateBtn').classList.remove('d-none');">
+                                    <button type="submit" class="btn btn-secondary d-none" id="updateBtn">更新</button>
+                                </td>
+                                <td>
+                                    <form action="{{ route('admin.banner.destroy', $banner) }} method="post">
                                         @csrf
                                         @method('delete')
-                                        <button type="submit" class="btn btn-danger">
-                                        <i class="bi bi-dash-circle"></i> 
-                                
+                                        <button type="submit" class="bg-white border-0" id="testTwo">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#FFFFFF"
+                                            class="bg-danger rounded-5" viewBox="0 0 16 16">
+                                            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
+                                        </svg>
                                         </button>
+
                                     </form>
                                 </td>
                             </tr>
                         @endforeach
-                        <tr>
-                            <td colspan="2">
-                                <form action="{{ route('admin.banner.store') }}" method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="file" name="image" accept="image/*">
-                                    <button type="submit" class="btn btn-success mt-3">
-                                        <i class="bi bi-plus-circle"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
+
 
                     </tbody>
                 </table>
             </div>
-        @endsection
+            
+            <form action="{{ route('admin.banner.store') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="d-flex justify-content-center align-items-center">
+                    <label for="fileInput" class="m-4 bg-success rounded-5 text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#FFFFFF"
+                            class="bg-success rounded-5" viewBox="0 0 16 16">
+                            <path
+                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                        </svg>
+                        <input type="file" id="fileInput" name="image" style="display: none">
+                    </label>
+
+                    <div class="text-center flex-grow-1">
+                        <button type="submit" class="btn btn-secondary" id="testTwo">登録</button>
+                    </div>
+                </div>
+            </form>
+            <script>
+                document.getElementById('fileInput').click();
+            </script>
+        </div>
+    </div>
+    </div>
+@endsection

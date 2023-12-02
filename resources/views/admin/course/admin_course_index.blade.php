@@ -82,53 +82,30 @@
                     </ul>
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <div class="d-flex justify-content-center align-items-center flex-column">
-                <h2 class="text-center mb-5">タイトル</h2>
+            <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-center align-items-center flex-column">
+                    <h2 class="text-center mb-5">タイトル</h2>
+                </div>
+                <div>
+                    <div class="mb-3 row">
+                        @foreach ($courses ?? [] as $course)
+                            <div class="col-4">
+                                <img src="{{ asset('storage/' . $course->image) }}" alt="バナー画像" style="width:100px"><br>
+                                {{ $course->lesson_name }}
+                                <a
+                                    href="{{ route('admin.course.edit', $course) }}"class="btn btn-primary btn-success">編集</a>
+                                <button class="btn btn-danger delete-course"
+                                    data-course-id="{{ $course->id }}">削除</button>
+                            </div>
+                        @endforeach
+
+                    </div>
+
+
+                </div>
+
             </div>
-            <div>
-                <div class="mb-3 row">
-                    @foreach ($courses ?? [] as $course)
-                        <div class="col-4">{{ $course->lesson_name }}</div>
-                    @endforeach
-                    @foreach ($courses ?? [] as $course)
-                        <div class="col-4">{{ $course->lesson_name }}</div>
-                    @endforeach
-                    @foreach ($courses ?? [] as $course)
-                        <div class="col-4">{{ $course->lesson_name }}</div>
-                    @endforeach
-                </div>
-                <div class="mb-3 row">
-                    @foreach ($courses ?? [] as $course)
-                        <div class="col-4">{{ $course->lesson_name }}</div>
-                    @endforeach
-                    @foreach ($courses ?? [] as $course)
-                        <div class="col-4">{{ $course->lesson_name }}</div>
-                    @endforeach
-                    @foreach ($courses ?? [] as $course)
-                        <div class="col-4">{{ $course->lesson_name }}</div>
-                    @endforeach
-
-                </div>
-
-                <!-- 授業内容の表示エリア -->
-                <div class="course-container">
-                    @foreach ($courses as $course)
-                    @endforeach
-                    <a href="{{ route('admin.course.edit', $course) }}"class="btn btn-primary btn-success">編集</a>
-                    <button class="btn btn-danger delete-course" data-course-id="{{ $course->id }}">削除</button>
-                </div>
-            </div>
-
         </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
     </div>
 @endsection

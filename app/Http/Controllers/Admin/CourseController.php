@@ -15,11 +15,16 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $courses = Course::all(); // すべての授業を取得
+        if (!$request->grade) {
+            $courses =Course::all();
+        }
+        else{
+            $courses = Course::where('grade_id', $request->grade)->get();
+        }
     return view('admin.course.admin_course_index', compact('courses'));
-    }
+}
     /**
      * Show the form for creating a new resource.
      *
