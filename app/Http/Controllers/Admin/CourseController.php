@@ -7,6 +7,7 @@ use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CourseStoreRequest;
+use App\Http\Requests\CourseUpdateRequest;
 
 class CourseController extends Controller
 {
@@ -79,7 +80,7 @@ class CourseController extends Controller
     }
 
 // 更新処理
-    public function update(Request $request, Course $course)
+    public function update(CourseUpdateRequest $request, Course $course)
     {
         DB::beginTransaction();
         try {

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <a href="{{ route('admin_index') }}" style="font-size: 18px; color:black;">←戻る</a>
-    <h2 class="mb-4 mt-3">授業一覧</h2>
+    <a href="{{ route('admin_index') }}" style="font-size: 18px; color:black; margin-left: 20px;">←戻る</a>
+    <h2 class="mb-4 mt-3" style=" margin-left: 20px;">授業一覧</h2>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-9">

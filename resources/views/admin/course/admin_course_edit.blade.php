@@ -10,7 +10,7 @@
                         <h2 class="mb-4 mt-3">授業編集</h2>
                     </div>
                     <div class="card-body">
-                     <form action="{{ route('admin.course.update',$course->id) }}" method="POST" enctype="multipart/form-data">
+                     <form action="{{ route('admin.course.update',['id'=>$course->id]) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <label for="img_path" class="col-sm-2 col-form-label">サムネイル</label>
