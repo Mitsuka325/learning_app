@@ -83,7 +83,7 @@ class CourseController extends Controller
     {
         DB::beginTransaction();
         try {
-            $validatedData = $request->validated(); 
+            $validatedData = $request->validated();
             $course->fill($validatedData);
 
             if ($request->hasFile('img_path')) {

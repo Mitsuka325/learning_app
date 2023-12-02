@@ -10,20 +10,20 @@
                         <h2 class="mb-4 mt-3">授業編集</h2>
                     </div>
                     <div class="card-body">
-                        {{-- <form action="{{ route('admin.course.update',$course->id) }}" method="POST" enctype="multipart/form-data">
+                     <form action="{{ route('admin.course.update',$course->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <label for="img_path" class="col-sm-2 col-form-label">サムネイル</label>
-                            <input type="file" class="form-control" id="image" name="Image"> --}}
+                            <img src="{{ asset('storage/' . $course->image) }}" alt="course Image" class="img-fluid">
 
-                    {{-- </div>
+                     </div>
 
                     <div class=" mb-3">
                         <label for="grade" class="form-label">学年</label>
                         <select class="form-select" aria-label="Default select example" id="grade" name="grade_id">
                             <option value="{{ $course->grade->id }}">{{ $course->grade->grade_name }}</option>
                         </select>
-                    </div> --}}
+                    </div>
 
                     <div class="mb-3">
                         <label for="lesson_name" class="form-label">授業名</label>
@@ -50,6 +50,8 @@
 
                     <div class="mb-3 text-center">
                         <button type="submit" class="btn btn-primary btn-success">更新</button>
+                        <button class="btn btn-danger delete-course"
+                                                data-course-id="{{ $course->id }}">削除</button>
                         <a href="{{ route('admin_index') }}" style="font-size: 18px; color:black;">←戻る</a>
                         </form>
                     </div>

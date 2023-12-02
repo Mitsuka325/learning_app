@@ -3,109 +3,127 @@
 @section('content')
     <a href="{{ route('admin_index') }}" style="font-size: 18px; color:black;">←戻る</a>
     <h2 class="mb-4 mt-3">授業一覧</h2>
-    </div>
-    <a href="{{ route('admin.course.create') }}" class="btn btn-primary mb-5">新規投稿</a>
-    </div>
-    {{-- {{ request()->query('grade') }} --}}
-    {{ \App\Models\Grade::find(request()->query('grade'))?->grade_name }}
-    <div class="text-end mb-3">
-    </div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3 col-lg-2 bg-body-tertiary">
+            <div class="col-md-9">
 
-
-                <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page"
-                                href="courses?grade=1">
-                                小学1年生
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 pt-3" href="courses?grade=2">
-                                小学2年生
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 pt-3" href="courses?grade=3">
-                                小学3年生
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 pt-3" href="courses?grade=4">
-                                小学4年生
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 pt-3" href="courses?grade=5">
-                                小学5年生
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 pt-3" href="courses?grade=6">
-                                小学6年生
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 pt-3" href="courses?grade=7">
-                                中学1年生
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 pt-3" href="courses?grade=8">
-                                中学2年生
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 pt-3" href="courses?grade=9">
-                                中学3年生
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 pt-3" href="courses?grade=10">
-                                高校1年生
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 pt-3" href="courses?grade=11">
-                                高校2年生
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2 pt-3" href="courses?grade=12">
-                                高校3年生
-                            </a>
-                        </li>
-
-                    </ul>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <a href="{{ route('admin.course.create') }}" class="btn btn-primary m-4 mb-5">新規登録</a>
+                    @if(request()->has('grade'))
+                    <h2 class="mb-4 ms-5 mx-auto bg-primary  btn btn-outline-primary gap-2 nav-link pt-2 text-white"
+                        style="width: fit-content; font-size: 20px; padding: 10px 20px;">
+                        {{ \App\Models\Grade::find(request()->query('grade'))?->grade_name }}</h2>
+                        @endif
                 </div>
-            </div>
-
-            <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="d-flex justify-content-center align-items-center flex-column">
-                    <h2 class="text-center mb-5">タイトル</h2>
+                <div class="text-end mb-3">
                 </div>
-                <div>
-                    <div class="mb-3 row">
-                        @foreach ($courses ?? [] as $course)
-                            <div class="col-4">
-                                <img src="{{ asset('storage/' . $course->image) }}" alt="バナー画像" style="width:100px"><br>
-                                {{ $course->lesson_name }}
-                                <a
-                                    href="{{ route('admin.course.edit', $course) }}"class="btn btn-primary btn-success">編集</a>
-                                <button class="btn btn-danger delete-course"
-                                    data-course-id="{{ $course->id }}">削除</button>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3 col-lg-2 bg-body-tertiary">
+
+
+                            <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item mb-3">
+                                        <a class="align-items-center bg-primary  btn btn-outline-primary d-flex gap-2 nav-link pt-3 rounded-5 text-white"
+                                         href="courses?grade=1" style="width: fit-content; display: inline-block;">
+                                            小学1年生
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-3">
+                                        <a class="align-items-center bg-primary  btn btn-outline-primary d-flex gap-2 nav-link pt-3 rounded-5 text-white"
+                                         href="courses?grade=2" style="width: fit-content; display: inline-block;">
+                                            小学2年生
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-3">
+                                        <a class="align-items-center bg-primary  btn btn-outline-primary d-flex gap-2 nav-link pt-3 rounded-5 text-white"
+                                         href="courses?grade=3" style="width: fit-content; display: inline-block;">
+                                            小学3年生
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-3">
+                                        <a class="align-items-center bg-primary  btn btn-outline-primary d-flex gap-2 nav-link pt-3 rounded-5 text-white"
+                                         href="courses?grade=4" style="width: fit-content; display: inline-block;">
+                                            小学4年生
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-3">
+                                        <a class="align-items-center bg-primary  btn btn-outline-primary d-flex gap-2 nav-link pt-3 rounded-5 text-white"
+                                         href="courses?grade=5" style="width: fit-content; display: inline-block;">
+                                            小学5年生
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-3">
+                                        <a class="align-items-center bg-primary  btn btn-outline-primary d-flex gap-2 nav-link pt-3 rounded-5 text-white"
+                                         href="courses?grade=6" style="width: fit-content; display: inline-block;">
+                                            小学6年生
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-3">
+                                        <a class="align-items-center bg-info  btn btn-outline-primary d-flex gap-2 nav-link pt-3 rounded-5 text-white"
+                                        href="courses?grade=7" style="width: fit-content; display: inline-block;">
+                                            中学1年生
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-3">
+                                        <a class="align-items-center bg-info  btn btn-outline-primary d-flex gap-2 nav-link pt-3 rounded-5 text-white"
+                                         href="courses?grade=8" style="width: fit-content; display: inline-block;">
+                                            中学2年生
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-3">
+                                        <a class="align-items-center bg-info  btn btn-outline-primary d-flex gap-2 nav-link pt-3 rounded-5 text-white"
+                                        href="courses?grade=9" style="width: fit-content; display: inline-block;">
+                                            中学3年生
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-3">
+                                        <a class="align-items-center bg-success  btn btn-outline-primary d-flex gap-2 nav-link pt-3 rounded-5 text-white"
+                                         href="courses?grade=10" style="width: fit-content; display: inline-block;">
+                                            高校1年生
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-3">
+                                        <a class="align-items-center bg-success  btn btn-outline-primary d-flex gap-2 nav-link pt-3 rounded-5 text-white"
+                                         href="courses?grade=11" style="width: fit-content; display: inline-block;">
+                                            高校2年生
+                                        </a>
+                                    </li>
+                                    <li class="nav-item mb-3">
+                                        <a class="align-items-center bg-success  btn btn-outline-primary d-flex gap-2 nav-link pt-3 rounded-5 text-white"
+                                        href="courses?grade=12" style="width: fit-content; display: inline-block;">
+                                            高校3年生
+                                        </a>
+                                    </li>
+
+                                </ul>
                             </div>
-                        @endforeach
+                        </div>
 
+                        <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                            <div class="d-flex justify-content-center align-items-center flex-column">
+
+                            </div>
+                            <div>
+                                <div class="mb-3 row">
+                                    @foreach ($courses ?? [] as $course)
+                                        <div class="col-4">
+                                            <img src="{{ asset('storage/' . $course->image) }}" alt="バナー画像"
+                                                style="width:100px"><br>
+                                            {{ $course->lesson_name }}
+                                            <a
+                                                href="{{ route('admin.course.edit', $course->id) }}"class="btn btn-primary btn-success">編集</a>
+                                            
+                                        </div>
+                                    @endforeach
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
                     </div>
-
-
                 </div>
-
-            </div>
-        </div>
-    </div>
-@endsection
+            @endsection

@@ -33,7 +33,7 @@ Route::get('admin/course/{id}', [App\Http\Controllers\Admin\CourseController::cl
 Route::get('admin/course/{id}/edit', [App\Http\Controllers\Admin\CourseController::class, 'edit'])->name('admin.course.edit');
 Route::put('admin/course/{id}', [App\Http\Controllers\Admin\CourseController::class, 'update'])->name('admin.course.update');
 Route::delete('admin/course/{id}', [App\Http\Controllers\Admin\CourseController::class, 'destroy'])->name('admin.course.destroy');
-
+// Route::resource('admin/courses',CourseController::class);
 Route::resource('admin/notice', NoticeController::class);
 Route::get('/admin/notice', [NoticeController::class, 'index'])->name('admin.notice.index');
 
