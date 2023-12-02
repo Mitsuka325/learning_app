@@ -15,17 +15,21 @@
                 <table class="table">
                     <tbody>
                         @foreach ($banners as $banner)
-                            <tr>
-                                <td>
-                                    <img src="{{ asset('storage/' . $banner->image) }}" alt="バナー画像" style="width:100px">
-                                </td>
-                                <td>
+                        <tr>
+                            <td>
+                                <img src="{{ asset('storage/' . $banner->image) }}" alt="バナー画像" style="width:100px">
+                            </td>
+                            <td>
+                            <form action="{{ route('admin.banner.update', $banner->id) }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                @method('put')
                                     <input type="file" name="image" accept="image/*"
                                         onclick="document.getElementById('updateBtn').classList.remove('d-none');">
                                     <button type="submit" class="btn btn-secondary d-none" id="updateBtn">更新</button>
+                                </form>
                                 </td>
                                 <td>
-                                    <form action="{{ route('admin.banner.destroy', $banner) }} method="post">
+                                    <form action="{{ route('admin.banner.destroy', $banner) }}"method="post">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="bg-white border-0" id="testTwo">

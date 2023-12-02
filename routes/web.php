@@ -37,8 +37,9 @@ Route::resource('admin/courses',CourseController::class);
 Route::resource('admin/notice', NoticeController::class);
 Route::get('/admin/notice', [NoticeController::class, 'index'])->name('admin.notice.index');
 
-
+Route::resource('admin/banners', BannerController::class);
 Route::get('/admin/banner', [BannerController::class, 'index'])->name('admin.banner.index');
 Route::get('/admin/banner/create', [BannerController::class, 'create'])->name('admin.banner.create');
 Route::post('/admin/banner/store', [BannerController::class, 'store'])->name('admin.banner.store');
+Route::put('/admin/banner/{banner}', [BannerController::class, 'update'])->name('admin.banner.update');
 Route::delete('admin/banner/{banner}', [BannerController::class, 'destroy'])->name('admin.banner.destroy');
