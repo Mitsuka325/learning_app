@@ -9,19 +9,26 @@
 
                         <h2 class="mb-4 mt-3">授業編集</h2>
                     </div>
+                </div>
                     <div class="card-body">
-                     <form action="{{ route('admin.course.update',['id'=>$course->id]) }}" method="POST" enctype="multipart/form-data">
+                     <form action="{{ route('admin.course.update',[$course->id]) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <label for="img_path" class="col-sm-2 col-form-label">サムネイル</label>
-                            <img src="{{ asset('storage/' . $course->image) }}" alt="course Image" class="img-fluid">
+                            <img src="{{ asset('storage/images/' . $course->image) }}" alt="course Image" class="img-fluid">
 
-                     </div>
-
+                            <div class="mb-3">
+                                <label for="new_image" class="form-label">新しい画像を選択</label>
+                                <input type="file" class="form-control" id="new_image" name="new_image">
+                            </div>
                     <div class=" mb-3">
                         <label for="grade" class="form-label">学年</label>
                         <select class="form-select" aria-label="Default select example" id="grade" name="grade_id">
-                            <option value="{{ $course->grade->id }}">{{ $course->grade->grade_name }}</option>
+                            @foreach($grades as $grade)
+                                <option value="{{ $grade->id }}" @if($course->grade->id === $grade->id) selected @endif>
+                                    {{ $grade->grade_name }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -50,10 +57,44 @@
 
                     <div class="mb-3 text-center">
                         <button type="submit" class="btn btn-primary btn-success">更新</button>
-                        <button class="btn btn-danger delete-course"
-                                                data-course-id="{{ $course->id }}">削除</button>
-                        <a href="{{ route('admin_index') }}" style="font-size: 18px; color:black;">←戻る</a>
+                        <form id="deleteForm" action="{{ route('admin.course.destroy', [$course->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger delete-course" data-course-id="{{ $course->id }}">削除</button>
                         </form>
+
+<script>
+        const deleteButtons = document.querySelectorAll('.delete-course');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                if (confirm('本当にこのコースを削除しますか？')) {
+                    let courseId = event.target.dataset.courseId; 
+                fetch(`/admin/courses/${courseId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json'
+                    },
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // 成功時の処理（リダイレクトなど）
+                        window.location.reload();
+                    } else {
+                        // エラー時の処理
+                        alert('削除に失敗しました');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        });
+    });
+    </script>
+                        <a href="{{ route('admin.course.index') }}" style="font-size: 18px; color:black;">←戻る</a>
+                    </div>    
+                    </form>
                     </div>
                 </div>
             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Models\Grade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CourseStoreRequest;
@@ -19,13 +20,12 @@ class CourseController extends Controller
     public function index(Request $request)
     {
         if (!$request->grade) {
-            $courses =Course::all();
-        }
-        else{
+            $courses = Course::all();
+        } else {
             $courses = Course::where('grade_id', $request->grade)->get();
         }
-    return view('admin.course.admin_course_index', compact('courses'));
-}
+        return view('admin.course.admin_course_index', compact('courses'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -35,51 +35,54 @@ class CourseController extends Controller
     {
         return view('admin.course.admin_course_create');
     }
-    
-    // 作成機能
-      public function store(CourseStoreRequest $request)
-  {
-      DB::beginTransaction(); // トランザクションを開始
-      try {
-          $validatedData = $request->validated(); // バリデーション済みデータ取得
-          $validatedData['grade_id'] = $request->input('grade_id');
-          $course = new Course(); 
-          $course->fill($validatedData);
-  
-          if ($request->hasFile('img_path')) {
-              $imgPath = $request->file('img_path')->store('images');
-              $course->image = $imgPath;
-          }
-          $course->save(); // データベースへの保存
-  
-          DB::commit(); // トランザクションをコミット
-          return redirect()->route('admin.course.index')->with('flash_message', '授業の登録が完了しました');
-          
-      } catch (\Throwable $th) {
-          DB::rollBack(); // エラーがあった場合はロールバック
-          return back()->withErrors(['error' => '授業の作成に失敗しました']);
-      }
-  }
 
-//   詳細ページ
+    // 作成機能
+    public function store(CourseStoreRequest $request)
+    {
+        DB::beginTransaction(); // トランザクションを開始
+        try {
+            $validatedData = $request->validated(); // バリデーション済みデータ取得
+            $validatedData['grade_id'] = $request->input('grade_id');
+            $course = new Course();
+            $course->fill($validatedData);
+
+            if ($request->hasFile('img_path')) {
+                $imgPath = $request->file('img_path')->store('images');
+                $course->image = $imgPath;
+            }
+            $course->save(); // データベースへの保存
+
+            DB::commit(); // トランザクションをコミット
+            return redirect()->route('admin.course.index')->with('flash_message', '授業の登録が完了しました');
+        } catch (\Throwable $th) {
+            DB::rollBack(); // エラーがあった場合はロールバック
+            return back()->withErrors(['error' => '授業の作成に失敗しました']);
+        }
+    }
+
+    //   詳細ページ
     // public function show(Course $course)
     // {
-        public function show($id)
-{
-    $course = Course::find($id); 
+    public function show($id)
+    {
+        $course = Course::find($id);
 
-    if (!$course) {
-    }
+        if (!$course) {
+        }
         return view('admin.course.admin_course_show', compact('course'));
     }
 
-// 更新ページ
-    public function edit(Course $course)
+    // 更新ページ
+    public function edit($id)
     {
-        return view('admin.course.admin_course_edit', compact('course'));
+
+        $course = Course::find($id);
+        $grades = Grade::all(); // もしくは適切なデータを取得するクエリを実行
+
+        return view('admin.course.admin_course_edit', compact('course', 'grades'));
     }
 
-// 更新処理
+    // 更新処理
     public function update(CourseUpdateRequest $request, Course $course)
     {
         DB::beginTransaction();
@@ -87,9 +90,13 @@ class CourseController extends Controller
             $validatedData = $request->validated();
             $course->fill($validatedData);
 
-            if ($request->hasFile('img_path')) {
-                $imgPath = $request->file('img_path')->store('images');
-                $course->image= $imgPath;
+            if ($request->hasFile('new_image')) {
+                $newImage = $request->file('new_image');
+                $imageName = time() . '_' . $newImage->getClientOriginalName();
+                $newImage->storeAs('public','images/'. $imageName);
+
+
+                $course->image = 'images/'. $imageName;
             }
             $course->save();
             DB::commit();
@@ -101,7 +108,7 @@ class CourseController extends Controller
     }
 
     // 削除機能
-    public function destroy(Course $course,Request $request)
+    public function destroy(Course $course, Request $request)
     {
         DB::beginTransaction();
         try {
@@ -109,8 +116,8 @@ class CourseController extends Controller
             DB::commit();
             if ($request->ajax()) {
                 return Course::search($request)->get();
-            }else
-            return redirect()->route('admin.course.index')->with('flash_message', '授業が削除されました');
+            } else
+                return redirect()->route('admin.course.index')->with('flash_message', '授業が削除されました');
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->withErrors(['error' => '授業の削除に失敗しました']);

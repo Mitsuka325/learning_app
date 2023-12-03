@@ -32,9 +32,9 @@ Route::get('/admin/course', [App\Http\Controllers\Admin\CourseController::class,
 Route::get('admin/course/create', [App\Http\Controllers\Admin\CourseController::class, 'create'])->name('admin.course.create');
 Route::post('admin/course/store', [App\Http\Controllers\Admin\CourseController::class, 'store'])->name('course.store');
 Route::get('admin/course/{id}', [App\Http\Controllers\Admin\CourseController::class, 'show'])->name('admin.course.show');
-Route::get('admin/course/{id}/edit', [App\Http\Controllers\Admin\CourseController::class, 'edit'])->name('admin.course.edit');
-Route::put('admin/course/{id}', [App\Http\Controllers\Admin\CourseController::class, 'update'])->name('admin.course.update');
-Route::delete('admin/course/{id}', [App\Http\Controllers\Admin\CourseController::class, 'destroy'])->name('admin.course.destroy');
+Route::get('admin/course/{course}/edit', [App\Http\Controllers\Admin\CourseController::class, 'edit'])->name('admin.course.edit');
+Route::put('admin/course/{course}', [App\Http\Controllers\Admin\CourseController::class, 'update'])->name('admin.course.update');
+Route::delete('admin/course/{course}', [App\Http\Controllers\Admin\CourseController::class, 'destroy'])->name('admin.course.destroy');
 Route::resource('admin/courses',CourseController::class);
 Route::resource('admin/notice', NoticeController::class);
 

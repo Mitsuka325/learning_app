@@ -112,6 +112,7 @@
                                             <img src="{{ asset('storage/' . $course->image) }}" alt="バナー画像"
                                                 style="width:100px"><br>
                                             {{ $course->lesson_name }}
+                                            {{ $course->created_at->format('m月d日 h:i') . '~' . $course->updated_at->format('h:i')}}
                                             <br>
                                             <a
                                                 href="{{ route('admin.course.edit', $course->id) }}"class="btn btn-primary btn-success">授業内容編集</a>
