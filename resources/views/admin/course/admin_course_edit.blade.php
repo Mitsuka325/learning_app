@@ -15,7 +15,7 @@
                             @csrf
                             @method('PUT')
                             <label for="img_path" class="col-sm-2 col-form-label">サムネイル</label>
-                            <img src="{{ asset('storage/images/' . $course->image) }}" alt="course Image" class="img-fluid">
+                            <img src="{{ asset('storage/' . $course->image) }}" alt="course Image" class="img-fluid">
 
                             <div class="mb-3">
                                 <label for="new_image" class="form-label">新しい画像を選択</label>
@@ -57,41 +57,13 @@
 
                     <div class="mb-3 text-center">
                         <button type="submit" class="btn btn-primary btn-success">更新</button>
+                    </form>
                         <form id="deleteForm" action="{{ route('admin.course.destroy', [$course->id]) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger delete-course" data-course-id="{{ $course->id }}">削除</button>
+                            <button type="submit" class="btn btn-danger delete-course" data-course-id="{{ $course->id }}"onclick='return confirm("本当に削除しますか？")'>削除</button>
                         </form>
 
-<script>
-        const deleteButtons = document.querySelectorAll('.delete-course');
-        deleteButtons.forEach(button => {
-            button.addEventListener('click', (event) => {
-                if (confirm('本当にこのコースを削除しますか？')) {
-                    let courseId = event.target.dataset.courseId; 
-                fetch(`/admin/courses/${courseId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'Content-Type': 'application/json'
-                    },
-                })
-                .then(response => {
-                    if (response.ok) {
-                        // 成功時の処理（リダイレクトなど）
-                        window.location.reload();
-                    } else {
-                        // エラー時の処理
-                        alert('削除に失敗しました');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            }
-        });
-    });
-    </script>
                         <a href="{{ route('admin.course.index') }}" style="font-size: 18px; color:black;">←戻る</a>
                     </div>    
                     </form>

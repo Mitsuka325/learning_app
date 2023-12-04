@@ -91,12 +91,8 @@ class CourseController extends Controller
             $course->fill($validatedData);
 
             if ($request->hasFile('new_image')) {
-                $newImage = $request->file('new_image');
-                $imageName = time() . '_' . $newImage->getClientOriginalName();
-                $newImage->storeAs('public','images/'. $imageName);
-
-
-                $course->image = 'images/'. $imageName;
+                $imagPath = $request->file('new_image')->store('images');
+                $course->image = $imagPath;
             }
             $course->save();
             DB::commit();

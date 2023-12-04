@@ -106,19 +106,25 @@
 
                             </div>
                             <div>
-                                <div class="mb-3 row">
+                                
+                                <div class="row">
                                     @foreach ($courses ?? [] as $course)
-                                        <div class="col-4">
-                                            <img src="{{ asset('storage/' . $course->image) }}" alt="バナー画像"
-                                                style="width:100px"><br>
-                                            {{ $course->lesson_name }}
-                                            {{ $course->created_at->format('m月d日 h:i') . '~' . $course->updated_at->format('h:i')}}
-                                            <br>
-                                            <a
-                                                href="{{ route('admin.course.edit', $course->id) }}"class="btn btn-primary btn-success">授業内容編集</a>
-                                            <a
-                                                href="{{ route('delivery-schedules.index') }}"class="btn btn-primary btn-success">配信日時編集</a>
-
+                                        <div class="col-md-4 mb-4">
+                                            <div class="card">
+                                                <br>
+                                                <img src="{{ asset('storage/' . $course->image) }}" class="card-img-top"
+                                                    alt="バナー画像" style="width: 50%">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{ $course->lesson_name }}</h5>
+                                                    <p class="card-text">
+                                                        {{ $course->created_at->format('m月d日 H:i') . '~' . $course->updated_at->format('H:i') }}
+                                                    </p>
+                                                    <a href="{{ route('admin.course.edit', $course->id) }}"
+                                                        class="btn btn-primary">授業内容編集</a>
+                                                    <a href="{{ route('delivery-schedules.index') }}"
+                                                        class="btn btn-primary">配信日時編集</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     @endforeach
 
