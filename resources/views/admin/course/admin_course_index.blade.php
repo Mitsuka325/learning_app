@@ -121,7 +121,7 @@
                                                     </p>
                                                     <a href="{{ route('admin.course.edit', $course->id) }}"
                                                         class="btn btn-primary">授業内容編集</a>
-                                                    <a href="{{ route('delivery-schedules.index') }}"
+                                                    <a href="{{ route('admin.delivery.index') }}"
                                                         class="btn btn-primary">配信日時編集</a>
                                                 </div>
                                             </div>

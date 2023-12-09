@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\DeliverySchedule;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\DeliveryStoreRequest;
 
 class DeliveryScheduleController extends Controller
 {
@@ -17,18 +17,26 @@ class DeliveryScheduleController extends Controller
 
     public function create()
     {
-        return view('admin.delivery-schedules.create');
+        return view('admin.delivery.admin_delivery_schedules_create');
     }
 
-    public function store(Request $request)
+    public function store(DeliveryStoreRequest $request)
     {
-        // バリデーションなどの適切な処理を追加
+        $validated=$request->validated();
 
-        DeliverySchedule::create($request->all());
+        $delivery = new DeliverySchedule();
 
-        return redirect()->route('admin.delivery-schedules.index')
-            ->with('flash_message', 'デリバリースケジュールが作成されました');
+        $delivery->start_date = $validated['start_date'];
+        $delivery->start_time = $validated['start_time'];
+        $delivery->end_date = $validated['end_date'];
+        $delivery->end_time = $validated['end_time'];
+
+        $delivery->save();
+
+        return redirect()->route('admin_index')->with('success', '配信情報が保存されました！');
     }
+
+       
 
     public function show(DeliverySchedule $schedule)
     {
@@ -47,7 +55,7 @@ class DeliveryScheduleController extends Controller
         $schedule->update($request->all());
 
         return redirect()->route('admin.delivery-schedules.index')
-            ->with('flash_message', 'デリバリースケジュールが更新されました');
+            ->with('flash_message', '配信情報が更新されました');
     }
 
     public function destroy(DeliverySchedule $schedule)
@@ -55,6 +63,6 @@ class DeliveryScheduleController extends Controller
         $schedule->delete();
 
         return redirect()->route('admin.delivery-schedules.index')
-            ->with('flash_message', 'デリバリースケジュールが削除されました');
+            ->with('flash_message', '配信情報が削除されました');
     }
 }
