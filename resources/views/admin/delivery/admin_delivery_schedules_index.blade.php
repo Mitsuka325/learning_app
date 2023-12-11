@@ -8,6 +8,9 @@
                     <div class="mb-3">
                         <a href="{{ route('admin_index') }}" style="font-size: 18px; color:black;">←戻る</a>
                         <h2 class="mb-4 mt-3">配信日時設定</h2>
+                        {{-- @foreach ($deliveries as $delivery)
+                            <h5>{{ $delivery->course->lesson_name }}</h5>
+                        @endforeach --}}
                     </div>
                 </div>
 

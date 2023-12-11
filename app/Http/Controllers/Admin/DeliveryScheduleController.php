@@ -33,36 +33,36 @@ class DeliveryScheduleController extends Controller
 
         $delivery->save();
 
-        return redirect()->route('admin_index')->with('success', '配信情報が保存されました！');
+        return redirect()->route('admin.course.index')->with('success', '配信情報が保存されました！');
     }
 
        
 
-    public function show(DeliverySchedule $schedule)
+    // public function show(DeliverySchedule $schedule)
+    // {
+    //     return view('admin.delivery-schedules.show', compact('schedule'));
+    // }
+
+    // public function edit(DeliverySchedule $schedule)
+    // {
+    //     return view('admin.delivery-schedules.edit', compact('schedule'));
+    // }
+
+    // public function update(Request $request, DeliverySchedule $schedule)
+    // {
+    //     // バリデーションなどの適切な処理を追加
+
+    //     $schedule->update($request->all());
+
+    //     return redirect()->route('admin.delivery-schedules.index')
+    //         ->with('flash_message', '配信情報が更新されました');
+    // }
+
+    public function destroy(DeliverySchedule $delivery)
     {
-        return view('admin.delivery-schedules.show', compact('schedule'));
-    }
+        $delivery->delete();
 
-    public function edit(DeliverySchedule $schedule)
-    {
-        return view('admin.delivery-schedules.edit', compact('schedule'));
-    }
-
-    public function update(Request $request, DeliverySchedule $schedule)
-    {
-        // バリデーションなどの適切な処理を追加
-
-        $schedule->update($request->all());
-
-        return redirect()->route('admin.delivery-schedules.index')
-            ->with('flash_message', '配信情報が更新されました');
-    }
-
-    public function destroy(DeliverySchedule $schedule)
-    {
-        $schedule->delete();
-
-        return redirect()->route('admin.delivery-schedules.index')
+        return redirect()->route('admin.delivery.index')
             ->with('flash_message', '配信情報が削除されました');
     }
 }

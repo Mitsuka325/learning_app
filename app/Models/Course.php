@@ -21,4 +21,10 @@ class Course extends Model
     {
         return $this->belongsTo(Grade::class, 'grade_id');
     }
+
+    // リレーション
+    public function deliverySchedules()
+    {
+        return $this->hasMany(DeliverySchedule::class);
+    }
 }

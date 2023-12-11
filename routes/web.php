@@ -51,7 +51,7 @@ Route::get('/admin/delivery',[DeliveryScheduleController::class,'index'])->name(
 Route::get('/admin/delivery/create', [DeliveryScheduleController::class,'create'])->name('admin.delivery.create');
 Route::post('/admin/delivery/store',[DeliveryScheduleController::class,'store'])->name('admin.delivery.store');
 Route::put('admin/delivery/{delivery}',[DeliveryScheduleController::class,'update'])->name('admin.delivery.update');
-Route::put('admin/delivery/{delivery}',[DeliveryScheduleController::class,'destroy'])->name('admin.delivery.destroy');
+Route::delete('admin/delivery/{delivery}',[DeliveryScheduleController::class,'destroy'])->name('admin.delivery.destroy');
 
 
 

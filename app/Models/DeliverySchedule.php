@@ -33,4 +33,9 @@ class DeliverySchedule extends Model
     {
         return $this->attributes['end_date'] . ' ' . $this->attributes['end_time'];
     }
+    // リレーション
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
 }
