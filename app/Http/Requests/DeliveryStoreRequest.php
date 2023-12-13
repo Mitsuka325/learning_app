@@ -28,6 +28,7 @@ class DeliveryStoreRequest extends FormRequest
             'start_time' => 'required',
             'end_date' => 'required|date',
             'end_time' => 'required',
+            'course_id'=>'required',
         ];
     }
 }

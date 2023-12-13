@@ -19,9 +19,9 @@ return new class extends Migration
             $table->time('start_time');
             $table->date('end_date');
             $table->time('end_time');
+            $table->foreignId('course_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
-    
     }
 
     /**

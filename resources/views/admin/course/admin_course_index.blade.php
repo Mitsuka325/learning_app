@@ -106,7 +106,7 @@
 
                             </div>
                             <div>
-                                
+
                                 <div class="row">
                                     @foreach ($courses ?? [] as $course)
                                         <div class="col-md-4 mb-4">
@@ -121,7 +121,7 @@
                                                     </p>
                                                     <a href="{{ route('admin.course.edit', $course->id) }}"
                                                         class="btn btn-primary">授業内容編集</a>
-                                                    <a href="{{ route('admin.delivery.index') }}"
+                                                    <a href="{{ route('admin.delivery.index', ['course_id' => $course->id]) }}"
                                                         class="btn btn-primary">配信日時編集</a>
                                                 </div>
                                             </div>

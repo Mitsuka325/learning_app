@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\DeliverySchedule;
 use Illuminate\Http\Request;
+use App\Models\Course; 
 use App\Http\Requests\DeliveryStoreRequest;
 
 class DeliveryScheduleController extends Controller
@@ -12,7 +13,8 @@ class DeliveryScheduleController extends Controller
     public function index()
     {
         $deliveries = DeliverySchedule::all();
-        return view('admin.delivery.admin_delivery_schedules_index', compact('deliveries'));
+        $courses = Course::all();
+        return view('admin.delivery.admin_delivery_schedules_index', compact('deliveries','courses'));
     }
 
     public function create()
@@ -22,10 +24,10 @@ class DeliveryScheduleController extends Controller
 
     public function store(DeliveryStoreRequest $request)
     {
-        $validated=$request->validated();
+        $validated = $request->validated();
 
         $delivery = new DeliverySchedule();
-
+        $delivery->course_id = $validated['course_id'];
         $delivery->start_date = $validated['start_date'];
         $delivery->start_time = $validated['start_time'];
         $delivery->end_date = $validated['end_date'];
@@ -36,7 +38,7 @@ class DeliveryScheduleController extends Controller
         return redirect()->route('admin.course.index')->with('success', '配信情報が保存されました！');
     }
 
-       
+
 
     // public function show(DeliverySchedule $schedule)
     // {

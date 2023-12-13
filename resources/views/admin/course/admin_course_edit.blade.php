@@ -46,8 +46,7 @@
 
                     <div class="mb-3">
                         <label for="description" class="form-label">授業概要</label>
-                        <textarea class="form-control" id="description" name="description" rows="3">
-                                {{ trim($course->description) }}</textarea>
+                        <textarea class="form-control" id="description" name="description" rows="3">{{ trim($course->description) }}</textarea>
                     </div>
 
                     <div class="mb-3 form-check">

@@ -8,9 +8,7 @@
                     <div class="mb-3">
                         <a href="{{ route('admin_index') }}" style="font-size: 18px; color:black;">←戻る</a>
                         <h2 class="mb-4 mt-3">配信日時設定</h2>
-                        {{-- @foreach ($deliveries as $delivery)
-                            <h5>{{ $delivery->course->lesson_name }}</h5>
-                        @endforeach --}}
+                     
                     </div>
                 </div>
 
@@ -30,13 +28,7 @@
                                                 </p>
                                             </td>
                                             <td>
-                                                {{-- <form action="{{ route('admin.delivery.update', $delivery->id) }}"
-                                                    method="post" enctype="multipart/form-data">
-                                                    @csrf
-                                                    @method('put')
-                                                    <button type="submit" class="btn btn-secondary d-none"
-                                                        id="updateBtn">更新</button>
-                                                </form> --}}
+
                                             </td>
                                             <td>
                                                 <form
@@ -70,14 +62,15 @@
                                 <input type="time" id="start_time" name="start_time" class="form-control">～
                                 <input type="date" id="end_date" name="end_date" class="form-control">
                                 <input type="time" id="end_time" name="end_time" class="form-control">
+                                <input type="hidden" id="course_id" name="course_id" value="{{ request()->input('course_id') }}">
                             </div>
                             <button type="submit" class="btn btn-secondary">登録</button>
                         </form>
-                            <label for="showDeliveryForm" class="m-4 bg-success rounded-5 text-white" style="cursor: pointer;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#FFFFFF"
+                        <label for="showDeliveryForm" class="m-4 bg-success rounded-5 text-white" style="cursor: pointer;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#FFFFFF"
                                 class="bg-success rounded-5" viewBox="0 0 16 16">
                                 <path
-                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                             </svg>
                         </label>
 
@@ -85,16 +78,16 @@
                             const showDeliveryLabel = document.querySelector('label[for="showDeliveryForm"]');
                             const showDeliveryForm = document.getElementById('showDeliveryForm');
                             const deliveryForm = document.getElementById('deliveryForm');
-                        
+
                             showDeliveryLabel.addEventListener('click', function(event) {
                                 event.preventDefault();
-                        
+
                                 if (deliveryForm.style.display === 'none') {
                                     deliveryForm.style.display = 'block';
-                                
+
                                 } else {
                                     deliveryForm.style.display = 'none';
-                        
+
                                 }
                             });
                         </script>
