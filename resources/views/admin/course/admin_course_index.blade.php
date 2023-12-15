@@ -116,9 +116,10 @@
                                                     alt="バナー画像" style="width: 50%">
                                                 <div class="card-body">
                                                     <h5 class="card-title">{{ $course->lesson_name }}</h5>
-                                                    <p class="card-text">
-                                                        {{ $course->created_at->format('m月d日 H:i') . '~' . $course->updated_at->format('H:i') }}
-                                                    </p>
+                                                        @foreach ($course->deliverySchedules as $deliverySchedule)
+                                                            <p>{{ \Illuminate\Support\Carbon::parse($deliverySchedule->start_date)->format('n月j日 H:i') }}～{{ \Illuminate\Support\Carbon::parse($deliverySchedule->end_date)->format('H:i') }}
+                                                            </p>
+                                                        @endforeach
                                                     <a href="{{ route('admin.course.edit', $course->id) }}"
                                                         class="btn btn-primary">授業内容編集</a>
                                                     <a href="{{ route('admin.delivery.index', ['course_id' => $course->id]) }}"

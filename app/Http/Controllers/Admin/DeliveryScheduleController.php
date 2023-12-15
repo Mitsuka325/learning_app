@@ -5,16 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\DeliverySchedule;
 use Illuminate\Http\Request;
-use App\Models\Course; 
+use App\Models\Course;
 use App\Http\Requests\DeliveryStoreRequest;
 
 class DeliveryScheduleController extends Controller
 {
     public function index()
     {
-        $deliveries = DeliverySchedule::all();
+        $courseId = request()->input('course_id'); // URLパラメーターからcourse_idを取得
+        $deliveries = DeliverySchedule::where('course_id', $courseId)->get();
         $courses = Course::all();
-        return view('admin.delivery.admin_delivery_schedules_index', compact('deliveries','courses'));
+        return view('admin.delivery.admin_delivery_schedules_index', compact('deliveries', 'courses'));
     }
 
     public function create()
@@ -35,30 +36,8 @@ class DeliveryScheduleController extends Controller
 
         $delivery->save();
 
-        return redirect()->route('admin.course.index')->with('success', '配信情報が保存されました！');
+        return response()->json(['success' => '配信情報が保存されました！']);
     }
-
-
-
-    // public function show(DeliverySchedule $schedule)
-    // {
-    //     return view('admin.delivery-schedules.show', compact('schedule'));
-    // }
-
-    // public function edit(DeliverySchedule $schedule)
-    // {
-    //     return view('admin.delivery-schedules.edit', compact('schedule'));
-    // }
-
-    // public function update(Request $request, DeliverySchedule $schedule)
-    // {
-    //     // バリデーションなどの適切な処理を追加
-
-    //     $schedule->update($request->all());
-
-    //     return redirect()->route('admin.delivery-schedules.index')
-    //         ->with('flash_message', '配信情報が更新されました');
-    // }
 
     public function destroy(DeliverySchedule $delivery)
     {
