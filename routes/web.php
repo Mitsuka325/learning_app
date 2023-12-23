@@ -56,10 +56,3 @@ Route::delete('admin/delivery/{delivery}',[DeliveryScheduleController::class,'de
 
 
 
-// GET         /admin/delivery-schedules              index   delivery-schedules.index
-// GET         /admin/delivery-schedules/create       create  delivery-schedules.create
-// POST        /admin/delivery-schedules              store   delivery-schedules.store
-// GET         /admin/delivery-schedules/{id}         show    delivery-schedules.show
-// GET         /admin/delivery-schedules/{id}/edit    edit    delivery-schedules.edit
-// PUT/PATCH   /admin/delivery-schedules/{id}         update  delivery-schedules.update
-// DELETE      /admin/delivery-schedules/{id}         destroy delivery-schedules.destroy
