@@ -24,10 +24,11 @@ class CourseStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'lesson_name' => 'max:255',
-            'grade_id' => '',
-            'video_url' => 'max:255',
-            'description' => 'max:2000',
+            'lesson_name' => 'required|max:255',
+            'grade_id' => 'required',
+            'video_url' => 'required|max:255',
+            'description' => 'required|max:2000',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // 例: 画像ファイルで、許可する拡張子は jpeg, png, jpg, gif, svg、最大ファイルサイズは 2048 KB
         ];
     }
 
@@ -37,7 +38,8 @@ class CourseStoreRequest extends FormRequest
             'lesson_name' => '授業名',
             'grade_id' => '学年',
             'video_url' => '動画URL',
-            'description' => '授業概要'
+            'description' => '授業概要',
+            'image'=>'画像',
         ];
     }
 
@@ -49,15 +51,15 @@ class CourseStoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'lesson_name.required' => '授業名は必須項目です',
-        'lesson_name.max' => '授業名は255文字以内で入力してください',
-        'grade_id.required' => '学年は必須項目です',
-        'video_url.required' => '動画URLは必須項目です',
-        'video_url.max' => '動画URLは255文字以内で入力してください',
-        'description.required' => '授業概要は必須項目です',
-        'description.string' => '授業概要は文字列で入力してください',
-        'description.max' => '授業概要は1000文字以内で入力してください',
-            
+            'lesson_name.required' => '授業名は必須項目です。',
+            'lesson_name.max' => '授業名は255文字以内で入力してください。',
+            'grade_id.required' => '学年は必須項目です。',
+            'video_url.max' => '動画URLは255文字以内で入力してください。',
+            'description.max' => '授業概要は2000文字以内で入力してください。',
+            'image.image' => '画像ファイルを選択してください。',
+            'image.mimes' => '画像ファイルはjpeg, png, jpg, gif, svg形式のいずれかを選択してください。',
+            'image.max' => '画像ファイルのサイズは2048KB以内でアップロードしてください。',
         ];
-    }
+            
+}
 }
