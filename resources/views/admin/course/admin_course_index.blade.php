@@ -122,7 +122,7 @@
                                                         @endforeach
                                                     <a href="{{ route('admin.course.edit', $course->id) }}"
                                                         class="btn btn-primary">授業内容編集</a>
-                                                    <a href="{{ route('admin.delivery.index', ['course_id' => $course->id]) }}"
+                                                    <a href="{{ route('admin.delivery.index', ['course_id' => $course->id,'lesson_name'=>$course->lesson_name]) }}"
                                                         class="btn btn-primary">配信日時編集</a>
                                                 </div>
                                             </div>

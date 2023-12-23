@@ -13,9 +13,10 @@ class DeliveryScheduleController extends Controller
     public function index()
     {
         $courseId = request()->input('course_id'); // URLパラメーターからcourse_idを取得
+        $lessonName = Course::where('id', $courseId)->value('lesson_name');
         $deliveries = DeliverySchedule::where('course_id', $courseId)->get();
         $courses = Course::all();
-        return view('admin.delivery.admin_delivery_schedules_index', compact('deliveries', 'courses'));
+        return view('admin.delivery.admin_delivery_schedules_index', compact('deliveries','lessonName', 'courses'));
     }
 
     public function create()
