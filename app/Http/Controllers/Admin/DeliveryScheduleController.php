@@ -35,10 +35,13 @@ class DeliveryScheduleController extends Controller
         $delivery->end_date = $validated['end_date'];
         $delivery->end_time = $validated['end_time'];
 
-        $delivery->save();
+       if( $delivery->save()){
 
         return response()->json(['success' => '配信情報が保存されました！']);
+    } else {
+        return response()->json(['error' => '配信情報の保存に失敗しました'], 500);
     }
+}
 
     public function destroy(DeliverySchedule $delivery)
     {

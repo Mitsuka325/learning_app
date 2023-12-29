@@ -11,6 +11,11 @@
                         @if (isset($lessonName))
                             <p>{{ $lessonName }}</p>
                         @endif
+                        @if (session('flash_message'))
+                            <div class="alert alert-success">
+                                {{ session('flash_message') }}
+                            </div>
+                        @endif
                     </div>
                 </div>
 
@@ -137,7 +142,9 @@
                                     .then(data => {
                                         // 成功時の処理
                                         console.log('Success:', data);
-                                        window.location.href = "{{ route('admin.course.index') }}";
+                                        // メッセージを表示
+                                        alert(data.success); // ここで配信情報が保存されましたというメッセージを表示する
+                                        // 他の処理を行う場合はここに追加
                                     })
                                     .catch(error => {
                                         // エラー時の処理
