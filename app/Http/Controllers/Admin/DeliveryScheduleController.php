@@ -16,7 +16,7 @@ class DeliveryScheduleController extends Controller
         $lessonName = Course::where('id', $courseId)->value('lesson_name');
         $deliveries = DeliverySchedule::where('course_id', $courseId)->get();
         $courses = Course::all();
-        return view('admin.delivery.admin_delivery_schedules_index', compact('deliveries','lessonName', 'courses'));
+        return view('admin.delivery.admin_delivery_schedules_index', compact('deliveries', 'lessonName', 'courses'));
     }
 
     public function create()
@@ -42,9 +42,10 @@ class DeliveryScheduleController extends Controller
 
     public function destroy(DeliverySchedule $delivery)
     {
+        $courseId = $delivery->course_id; // 削除する前にcourse_idを取得しておく
         $delivery->delete();
 
-        return redirect()->route('admin.delivery.index')
+        return redirect()->route('admin.delivery.index', ['course_id' => $courseId])
             ->with('flash_message', '配信情報が削除されました');
     }
 }

@@ -8,8 +8,8 @@
                     <div class="mb-3">
                         <a href="{{ route('admin_index') }}" style="font-size: 18px; color:black;">←戻る</a>
                         <h2 class="mb-4 mt-3">配信日時設定</h2>
-                        @if(isset($lessonName))
-                        <p>{{$lessonName}}</p>
+                        @if (isset($lessonName))
+                            <p>{{ $lessonName }}</p>
                         @endif
                     </div>
                 </div>
@@ -88,12 +88,14 @@
                                         })
                                         .then(response => {
                                             if (response.ok) {
-                                                // 削除成功時にindex画面にリダイレクトする
-                                                window.location.href = "{{ route('admin.course.index') }}";
+                                                window.location.href = `{{ route('admin.delivery.index') }}?course_id=${courseId}`;
+                                            } else {
+                                                throw new Error('Network response was not ok');
                                             }
                                         })
                                         .catch(error => {
                                             console.error('Error:', error);
+                                            alert('エラーが発生しました');
                                         });
                                 }
                             });
