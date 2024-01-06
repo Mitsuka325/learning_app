@@ -65,8 +65,9 @@
                             </div>
 
                             <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="is_public" name="is_public">
-                                <label class="form-check-label" for="is_public">常時公開する</label>
+                                <input type="hidden" name="always_delivery_flg" value="false">
+                                <input type="checkbox" class="form-check-input" id="always_delivery_flg" name="always_delivery_flg">
+                                <label class="form-check-label" for="always_delivery_flg">常時公開する</label>
                             </div>
 
                             <div class="mb-3 text-center">

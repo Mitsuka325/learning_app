@@ -15,6 +15,7 @@ class Course extends Model
         'video_url',
         'description',
         'image',
+        'always_delivery_flg',
     ];
 
     public function grade()

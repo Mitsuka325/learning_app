@@ -46,6 +46,9 @@ class CourseController extends Controller
             $course = new Course();
             $course->fill($validatedData);
 
+            $alwaysDeliveryFlg = $request->has('always_delivery_flg') ? true : false;
+            $course->always_delivery_flg = $alwaysDeliveryFlg;
+
             if ($request->hasFile('img_path')) {
                 $imgPath = $request->file('img_path')->store('images');
                 $course->image = $imgPath;

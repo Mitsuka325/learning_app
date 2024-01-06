@@ -29,6 +29,7 @@ class CourseStoreRequest extends FormRequest
             'video_url' => 'required|max:255',
             'description' => 'required|max:2000',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // 例: 画像ファイルで、許可する拡張子は jpeg, png, jpg, gif, svg、最大ファイルサイズは 2048 KB
+            'always_delivery_flg' => 'accepted',
         ];
     }
 
@@ -59,6 +60,7 @@ class CourseStoreRequest extends FormRequest
             'image.image' => '画像ファイルを選択してください。',
             'image.mimes' => '画像ファイルはjpeg, png, jpg, gif, svg形式のいずれかを選択してください。',
             'image.max' => '画像ファイルのサイズは2048KB以内でアップロードしてください。',
+            'always_delivery_flg.accepted' => '常時公開フラグは必須項目です。',
         ];
             
 }

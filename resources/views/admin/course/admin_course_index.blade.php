@@ -116,13 +116,16 @@
                                                     alt="バナー画像" style="width: 50%">
                                                 <div class="card-body">
                                                     <h5 class="card-title">{{ $course->lesson_name }}</h5>
-                                                        @foreach ($course->deliverySchedules as $deliverySchedule)
-                                                            <p>{{ \Illuminate\Support\Carbon::parse($deliverySchedule->start_date)->format('n月j日 H:i') }}～{{ \Illuminate\Support\Carbon::parse($deliverySchedule->end_date)->format('H:i') }}
-                                                            </p>
-                                                        @endforeach
+                                                    @if ($course->always_delivery_flg)
+                                                        <p>常時公開</p>
+                                                    @endif
+                                                    @foreach ($course->deliverySchedules as $deliverySchedule)
+                                                        <p>{{ \Illuminate\Support\Carbon::parse($deliverySchedule->start_date)->format('n月j日 H:i') }}～{{ \Illuminate\Support\Carbon::parse($deliverySchedule->end_date)->format('H:i') }}
+                                                        </p>
+                                                    @endforeach
                                                     <a href="{{ route('admin.course.edit', $course->id) }}"
                                                         class="btn btn-primary">授業内容編集</a>
-                                                    <a href="{{ route('admin.delivery.index', ['course_id' => $course->id,'lesson_name'=>$course->lesson_name]) }}"
+                                                    <a href="{{ route('admin.delivery.index', ['course_id' => $course->id, 'lesson_name' => $course->lesson_name]) }}"
                                                         class="btn btn-primary">配信日時編集</a>
                                                 </div>
                                             </div>

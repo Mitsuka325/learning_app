@@ -24,6 +24,7 @@
             <strong>授業名</strong>{{ $course->lesson_name }}<br>
             <strong>動画URL</strong>{{ $course->video_url }}<br>
             <strong>授業概要</strong>{{ $course->description }}<br>
+            <strong>常時公開フラグ</strong>{{ $course->always_delivery_flg ? '常時公開' : '非常時公開' }}<br>
             
             <a href="{{ route('admin.course.index') }}" class="btn btn-secondary mt-3">戻る</a>
         </div>

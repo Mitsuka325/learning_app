@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('video_url'); 
             $table->text('description');
             $table->string('image')->nullable(); 
+            $table->boolean('always_delivery_flg')->default(false);
             $table->timestamps();
         });
     }
