@@ -71,13 +71,14 @@
                             </form>
                         </div>
 
-                        <label for="showDeliveryForm" class="m-4 bg-success rounded-5 text-white" style="cursor: pointer;">
+                        <button type="button" class="m-4 bg-success rounded-circle text-white p-0"
+                            style="cursor: pointer; width: 40px; height: 40px; border:none;" onclick="duplicateForm()">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#FFFFFF"
-                                class="bg-success rounded-5" viewBox="0 0 16 16">
+                                class="bg-success rounded-circle" viewBox="0 0 16 16">
                                 <path
                                     d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                             </svg>
-                        </label>
+                        </button>
                         <button type="button" class="btn btn-secondary submit-all-btn">登録</button>
 
                         <script>
@@ -106,9 +107,11 @@
                             });
                         </script>
                         <script>
-                            const showDeliveryLabel = document.querySelector('label[for="showDeliveryForm"]');
-                            showDeliveryLabel.addEventListener('click', function() {
-                                duplicateForm();
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const button = document.querySelector('.bg-success.rounded-circle');
+                                button.addEventListener('click', function() {
+                                    duplicateForm();
+                                });
                             });
 
                             function duplicateForm() {
@@ -116,13 +119,7 @@
                                 const clone = original.cloneNode(true);
                                 clone.style.display = 'block';
                                 document.getElementById('formContainer').appendChild(clone);
-                                const submitBtn = clone.querySelector('.submit-btn');
-                                if (submitBtn) {
-                                    // .submit-btn 要素が存在する場合にイベントリスナーを追加する
-                                    submitBtn.addEventListener('click', function() {
-                                        submitForm(clone);
-                                    });
-                                }
+
                             }
 
                             function submitForm(form) {
