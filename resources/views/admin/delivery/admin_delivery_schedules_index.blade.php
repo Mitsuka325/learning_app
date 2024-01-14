@@ -72,64 +72,39 @@
                         </div>
 
                         <button type="button" class="m-4 bg-success rounded-circle text-white p-0"
-                            style="cursor: pointer; width: 40px; height: 40px; border:none;" onclick="duplicateForm()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#FFFFFF"
-                                class="bg-success rounded-circle" viewBox="0 0 16 16">
-                                <path
-                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-                            </svg>
-                        </button>
-                        <button type="button" class="btn btn-secondary submit-all-btn">登録</button>
-
-                        <script>
-                            document.addEventListener('click', function(event) {
-                                if (event.target.classList.contains('delete-btn')) {
-                                    const deliveryId = event.target.dataset.deliveryId;
-                                    fetch(`/admin/delivery/${deliveryId}`, {
-                                            method: 'DELETE',
-                                            headers: {
-                                                'Content-Type': 'application/json',
-                                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                            }
-                                        })
-                                        .then(response => {
-                                            if (response.ok) {
-                                                window.location.href = `{{ route('admin.delivery.index') }}?course_id=${courseId}`;
-                                            } else {
-                                                throw new Error('Network response was not ok');
-                                            }
-                                        })
-                                        .catch(error => {
-                                            console.error('Error:', error);
-                                            alert('エラーが発生しました');
-                                        });
-                                }
+                        style="cursor: pointer; width: 40px; height: 40px; border:none;" onclick="duplicateForm()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#FFFFFF"
+                            class="bg-success rounded-circle" viewBox="0 0 16 16">
+                            <path
+                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                        </svg>
+                    </button>
+                    <button type="button" class="btn btn-secondary submit-all-btn">登録</button>
+    
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const button = document.querySelector('.bg-success.rounded-circle');
+                            button.addEventListener('click', function() {
+                                duplicateForm();
                             });
-                        </script>
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                const button = document.querySelector('.bg-success.rounded-circle');
-                                button.addEventListener('click', function() {
-                                    duplicateForm();
-                                });
-                            });
-
-                            function duplicateForm() {
-                                const original = document.querySelector('.deliveryForm');
-                                const clone = original.cloneNode(true);
-                                clone.style.display = 'block';
-                                document.getElementById('formContainer').appendChild(clone);
-
-                            }
-
-                            function submitForm(form) {
+                        });
+    
+                        function duplicateForm() {
+                            const original = document.querySelector('.deliveryForm');
+                            const clone = original.cloneNode(true);
+                            clone.style.display = 'block';
+                            document.getElementById('formContainer').appendChild(clone);
+                        }
+    
+                        function submitAllForms() {
+                            const forms = document.querySelectorAll('#formContainer form');
+                            forms.forEach(function(form) {
                                 const data = new FormData(form);
-                                const url = form.getAttribute('action'); // フォームの送信先URLを取得
+                                const url = form.getAttribute('action');
                                 fetch(url, {
                                         method: 'POST',
                                         body: data
                                     })
-
                                     .then(response => {
                                         if (!response.ok) {
                                             throw new Error('Network response was not ok');
@@ -137,40 +112,23 @@
                                         return response.json();
                                     })
                                     .then(data => {
-                                        // 成功時の処理
-                                        console.log('Success:', data);
-                                        // メッセージを表示
-                                        alert(data.success); // ここで配信情報が保存されましたというメッセージを表示する
-                                        // 他の処理を行う場合はここに追加
+                                        alert(data.success);
                                         location.reload();
                                     })
                                     .catch(error => {
-                                        // エラー時の処理
                                         console.error('Error:', error);
-                                        // エラーメッセージを取得して適切な方法で表示する
-                                        // 例: ユーザーに警告を表示する
                                         alert('エラーが発生しました');
                                     });
-                            }
-
-                            function submitAllForms() {
-                                const forms = document.querySelectorAll('#formContainer form');
-                                forms.forEach(function(form) {
-                                    submitForm(form);
-                                });
-                            }
-
-                            document.addEventListener('click', function(event) {
-                                if (event.target.classList.contains('submit-btn')) {
-                                    submitForm(event.target.closest('form'));
-                                } else if (event.target.classList.contains('submit-all-btn')) {
-                                    submitAllForms();
-                                }
                             });
-                        </script>
-                    </div>
+                        }
+    
+                        document.addEventListener('click', function(event) {
+                            if (event.target.classList.contains('submit-all-btn')) {
+                                submitAllForms();
+                            }
+                        });
+                    </script>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection
