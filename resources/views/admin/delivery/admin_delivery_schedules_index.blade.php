@@ -58,7 +58,7 @@
 
                         <div id="formContainer">
                             <form action="{{ route('admin.delivery.store') }}" method="post" enctype="multipart/form-data"
-                                class="deliveryForm" style="display: none;">
+                                class="deliveryForm" style="display: block;">
                                 @csrf
                                 <div class="d-flex justify-content-center align-items-center">
                                     <input type="date" name="start_date" class="form-control">
@@ -82,13 +82,6 @@
                     <button type="button" class="btn btn-secondary submit-all-btn">登録</button>
     
                     <script>
-                        document.addEventListener('DOMContentLoaded', function() {
-                            const button = document.querySelector('.bg-success.rounded-circle');
-                            button.addEventListener('click', function() {
-                                duplicateForm();
-                            });
-                        });
-    
                         function duplicateForm() {
                             const original = document.querySelector('.deliveryForm');
                             const clone = original.cloneNode(true);
