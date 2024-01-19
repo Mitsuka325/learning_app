@@ -58,7 +58,7 @@
 
                         <div id="formContainer">
                             <form action="{{ route('admin.delivery.store') }}" method="post" enctype="multipart/form-data"
-                                class="deliveryForm" style="display: block;">
+                                class="deliveryForm" style="display: none;">
                                 @csrf
                                 <div class="d-flex justify-content-center align-items-center">
                                     <input type="date" name="start_date" class="form-control">
@@ -87,11 +87,12 @@
                             const clone = original.cloneNode(true);
                             clone.style.display = 'block';
                             document.getElementById('formContainer').appendChild(clone);
+                            document.querySelector('.submit-all-btn').style.display = 'block';
                         }
     
                         function submitAllForms() {
                             const forms = document.querySelectorAll('#formContainer form');
-                            forms.forEach(function(form) {
+                            forms.forEach(function(form,index) {
                                 const data = new FormData(form);
                                 const url = form.getAttribute('action');
                                 fetch(url, {
@@ -105,7 +106,9 @@
                                         return response.json();
                                     })
                                     .then(data => {
+                                        if(index===0){
                                         alert(data.success);
+                                        }
                                         location.reload();
                                     })
                                     .catch(error => {
