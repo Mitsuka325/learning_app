@@ -58,7 +58,7 @@
 
                         <div id="formContainer">
                             <form action="{{ route('admin.delivery.store') }}" method="post" enctype="multipart/form-data"
-                                class="deliveryForm" style="display: none;">
+                                class="deliveryForm" style="display: block;">
                                 @csrf
                                 <div class="d-flex justify-content-center align-items-center">
                                     <input type="date" name="start_date" class="form-control">
